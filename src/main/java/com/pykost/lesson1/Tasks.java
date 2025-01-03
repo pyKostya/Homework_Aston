@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class Tasks {
     public static void main(String[] args) {
         String task1 = "I love Java";
-        String task2 = "I love Java";
         turnString(task1);
 
         int[] task2 = {1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8, 9};
@@ -71,5 +70,6 @@ public class Tasks {
         }
         return true;
     }
-    
+
+
 }

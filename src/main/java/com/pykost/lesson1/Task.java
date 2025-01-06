@@ -2,7 +2,7 @@ package com.pykost.lesson1;
 
 import java.util.Arrays;
 
-public class Tasks {
+public class Task {
     public static void main(String[] args) {
         String task1 = "I love Java";
         turnString(task1);

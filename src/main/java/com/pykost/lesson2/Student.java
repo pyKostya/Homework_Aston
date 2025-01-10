@@ -4,12 +4,12 @@ package com.pykost.lesson2;
 public class Student implements Comparable<Student> {
     private final int id;
     private final String name;
-    private final String surName;
+    private final String surname;
 
     public Student(int id, String name, String surName) {
         this.id = id;
         this.name = name;
-        this.surName = surName;
+        this.surname = surName;
     }
 
     public int getId() {
@@ -20,8 +20,8 @@ public class Student implements Comparable<Student> {
         return name;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getSurname() {
+        return surname;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Student implements Comparable<Student> {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
+                ", surName='" + surname + '\'' +
                 '}';
     }
 }

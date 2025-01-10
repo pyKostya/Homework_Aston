@@ -163,7 +163,7 @@ public class MyArrayList<T> implements CustomList<T> {
 
     /**
      * Сортирует этот список в соответствии с порядком, заданным указанным компаратором.
-     * Реализует алгоритм quickSort (Быстрая сортировка)
+     * Реализует алгоритм сортировки quickSort (Быстрая сортировка)
      *
      * @param comparator компаратор используемый для сравнения элементов списка
      */
@@ -171,41 +171,6 @@ public class MyArrayList<T> implements CustomList<T> {
     public void sort(Comparator<? super T> comparator) {
         T[] array = elementData;
         quickSort(comparator, array, 0, size - 1);
-    }
-
-
-    private <T> void quickSort(Comparator<T> comparator, T[] list, int leftIndex, int rightIndex) {
-        if (leftIndex < rightIndex) {
-            int pivot = partition(comparator, list, leftIndex, rightIndex);
-            quickSort(comparator, list, leftIndex, pivot);
-            quickSort(comparator, list, pivot + 1, rightIndex);
-        }
-    }
-
-    private <T> int partition(Comparator<T> comparator, T[] list, int leftIndex, int rightIndex) {
-        T pivot = list[(leftIndex + rightIndex) / 2];
-        while (leftIndex <= rightIndex) {
-            while (comparator.compare(list[leftIndex], pivot) < 0) {
-                leftIndex++;
-            }
-            while (comparator.compare(list[rightIndex], pivot) > 0) {
-                rightIndex--;
-            }
-            if (leftIndex >= rightIndex) {
-                break;
-            }
-            swap(list, leftIndex, rightIndex);
-            leftIndex++;
-            rightIndex--;
-
-        }
-        return rightIndex;
-    }
-
-    private <T> void swap(T[] list, int leftIndex, int rightIndex) {
-        T temp = list[leftIndex];
-        list[leftIndex] = list[rightIndex];
-        list[rightIndex] = temp;
     }
 
     /**
@@ -234,7 +199,6 @@ public class MyArrayList<T> implements CustomList<T> {
         return obj;
     }
 
-
     /**
      * Возвращает строковое представление списка
      */
@@ -243,5 +207,54 @@ public class MyArrayList<T> implements CustomList<T> {
         return "MyArrayList{" +
                 "elementData=" + Arrays.toString(elementData) +
                 '}';
+    }
+
+    /**
+     * Один из самых быстрых известных универсальных алгоритмов сортировки массивов: в среднем O(n log n)
+     * обменов при упорядочении n элементов.
+     *
+     * @param leftIndex  левая граница подмасива
+     * @param rightIndex правая граница подмасива
+     * @param array      массив элементов
+     * @param comparator компаратор используемый для сравнения элементов массива
+     */
+    private <T> void quickSort(Comparator<T> comparator, T[] array, int leftIndex, int rightIndex) {
+        if (leftIndex < rightIndex) {
+            int pivot = partition(comparator, array, leftIndex, rightIndex);
+            quickSort(comparator, array, leftIndex, pivot);
+            quickSort(comparator, array, pivot + 1, rightIndex);
+        }
+    }
+
+    /**
+     * Определяет положение опорного элемента
+     */
+    private <T> int partition(Comparator<T> comparator, T[] array, int leftIndex, int rightIndex) {
+        T pivot = array[(leftIndex + rightIndex) / 2];
+        while (leftIndex <= rightIndex) {
+            while (comparator.compare(array[leftIndex], pivot) < 0) {
+                leftIndex++;
+            }
+            while (comparator.compare(array[rightIndex], pivot) > 0) {
+                rightIndex--;
+            }
+            if (leftIndex >= rightIndex) {
+                break;
+            }
+            swap(array, leftIndex, rightIndex);
+            leftIndex++;
+            rightIndex--;
+
+        }
+        return rightIndex;
+    }
+
+    /**
+     * Вспомогательный метод, меняет местами элементы в массиве.
+     */
+    private <T> void swap(T[] array, int leftIndex, int rightIndex) {
+        T temp = array[leftIndex];
+        array[leftIndex] = array[rightIndex];
+        array[rightIndex] = temp;
     }
 }
